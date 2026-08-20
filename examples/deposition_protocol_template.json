@@ -1,0 +1,295 @@
+{
+  "algorithm": {
+    "planner_algorithm_id": "known_sd_joint_z_surrogate_v2",
+    "rng_algorithm_id": "sha256_counter_domain_box_muller_u52_round12_v1"
+  },
+  "analysis_gate": {
+    "blank_policy": "none",
+    "bootstrap_resamples": 10000,
+    "bootstrap_seed": 20260820,
+    "max_order_ratio_fold_difference": 1.5,
+    "max_relative_humidity_span_pct": 5.0,
+    "max_temperature_span_c": 1.0,
+    "minimum_independent_runs": 46,
+    "minimum_order_balance_ratio": 0.5,
+    "minimum_reduction_fraction": 0.3,
+    "minimum_runs_per_order": 23
+  },
+  "document_type": "aegis_deposition_power_protocol",
+  "planning_inputs": {
+    "analysis_blank_policy": "none",
+    "analysis_bootstrap_resamples": 10000,
+    "analysis_bootstrap_seed": 20260820,
+    "anticipated_reduction_fraction": 0.45,
+    "conservative_assumed_log_ratio_sd": 0.35,
+    "device_id": "EXAMPLE-ONLY-NOT-A-HARDWARE-RECORD",
+    "exclusion_policy_id": "EXAMPLE-ONLY-POLICY-NOT-VALIDATED",
+    "exposure_s": 600.0,
+    "flow_slm": 10.0,
+    "gas": "air",
+    "max_order_ratio_fold_difference": 1.5,
+    "max_relative_humidity_span_pct": 5.0,
+    "max_temperature_span_c": 1.0,
+    "mc_search_resamples": 100000,
+    "mc_search_seed": 20260821,
+    "mc_validation_resamples": 100000,
+    "mc_validation_seed": 20260822,
+    "measurement_method_id": "EXAMPLE-ONLY-METHOD-NOT-VALIDATED",
+    "minimum_order_balance_ratio": 0.5,
+    "minimum_reduction_fraction": 0.3,
+    "minimum_runs_per_order_floor": 3,
+    "particle_nm": 300.0,
+    "pilot_independent_run_count": null,
+    "pilot_log_ratio_sd": null,
+    "pilot_sd_design_multiplier": 1.25,
+    "replacement_policy_id": "EXAMPLE-ONLY-REPLACEMENT-POLICY",
+    "sampled_area_cm2": 25.0,
+    "stopping_rule_id": "EXAMPLE-ONLY-STOPPING-RULE",
+    "target_joint_power": 0.8,
+    "two_sided_alpha": 0.05
+  },
+  "power_plan": {
+    "actual_bootstrap_gate_validated": false,
+    "assumptions": {
+      "allocation": "equal independent-run counts in both orders",
+      "known_design_sd_surrogate": true,
+      "minimum_runs_per_order_floor": 3,
+      "normal_independent_run_endpoint": true,
+      "order_distributions_assumed_equal_under_planning_alternative": true,
+      "planned_randomized_orders": [
+        "off_then_on",
+        "on_then_off"
+      ],
+      "recommended_run_counts_are_power_plan_outputs": true,
+      "sd_source": {
+        "design_sd": 0.35,
+        "kind": "conservative_assumed_log_ratio_sd",
+        "pilot_independent_run_count": null,
+        "prespecified_design_multiplier": null,
+        "reported_sd": 0.35,
+        "warning": "The assumed SD must be justified before data collection."
+      },
+      "target_joint_power": 0.8,
+      "threshold_is_user_prespecified": true
+    },
+    "endpoint": {
+      "definition": "Y_i = mean_j(log(field_on_corrected / field_off_corrected))",
+      "independent_unit": "independent_run_id",
+      "rows_are_not_independent_when_they_share_independent_run_id": true
+    },
+    "formula": {
+      "critical_z": 1.9599639845400534,
+      "description": "Normal known-SD screening approximation per order: ceil(((z_(1-alpha/2)+z_(per-order power))*sigma/(mu0-mu1))^2); per-order screening power = 1-(1-target joint power)/2.",
+      "normal_screening_runs_per_order": 23,
+      "normal_screening_total_independent_runs": 46,
+      "per_order_screening_power": 0.9,
+      "power_z": 1.2815515655446006,
+      "source_description": "Standard one-sample Normal mean test approximation; used only as an initial sample-size bound, not as an exact bootstrap-gate calculation."
+    },
+    "hypotheses": {
+      "alternative": "H1: mean(Y_i) < log(1 - minimum_reduction_fraction), equivalently R > minimum_reduction_fraction",
+      "anticipated_alternative_log_ratio": -0.5978370007556205,
+      "anticipated_reduction_fraction": 0.45,
+      "compatibility_note": "alpha/2 matches the upper endpoint of the analyzer's central two-sided confidence interval",
+      "log_margin_gap": 0.24116205681688818,
+      "minimum_reduction_fraction": 0.3,
+      "null": "H0: mean(Y_i) >= log(1 - minimum_reduction_fraction), equivalently R <= minimum_reduction_fraction",
+      "null_boundary_log_ratio": -0.35667494393873234,
+      "one_sided_upper_tail_alpha": 0.025,
+      "reduction_definition": "R = 1 - exp(mean(Y_i))",
+      "two_sided_alpha": 0.05
+    },
+    "joint_gate_simulation": {
+      "exact_or_full_analyzer_gate_simulation": false,
+      "independent_validation": {
+        "replicates": 100000,
+        "result": {
+          "estimated_joint_power": 0.82973,
+          "monte_carlo_standard_error": 0.0011886047581092718,
+          "replicates": 100000,
+          "runs_per_order": 23,
+          "successes": 82973,
+          "total_independent_runs": 46,
+          "wilson_95_percent_ci": [
+            0.8273877218388386,
+            0.8320469462499374
+          ],
+          "wilson_95_percent_lower": 0.8273877218388386
+        },
+        "seed": 20260822,
+        "stream_domain": "independent_final_validation",
+        "used_for_run_count_selection": false,
+        "wilson_lower_requirement_met": true
+      },
+      "joint_success_rule": "pooled and both order-specific known-SD z upper bounds are below the null log-ratio boundary, and the absolute order mean difference does not exceed log(max_order_ratio_fold_difference)",
+      "limitation": "The analyzer uses percentile bootstrap intervals and additional data-quality checks; actual locked-protocol operating characteristics require separate validation.",
+      "max_order_log_difference": 0.4054651081081644,
+      "max_order_ratio_fold_difference": 1.5,
+      "method": "seeded_known_sd_normal_z_bound_surrogate",
+      "recommendation_requires_wilson_lower_at_least_target": true,
+      "result": {
+        "estimated_joint_power": 0.82973,
+        "monte_carlo_standard_error": 0.0011886047581092718,
+        "replicates": 100000,
+        "runs_per_order": 23,
+        "successes": 82973,
+        "total_independent_runs": 46,
+        "wilson_95_percent_ci": [
+          0.8273877218388386,
+          0.8320469462499374
+        ],
+        "wilson_95_percent_lower": 0.8273877218388386
+      },
+      "rng_algorithm_id": "sha256_counter_domain_box_muller_u52_round12_v1",
+      "search": {
+        "replicates": 100000,
+        "result": {
+          "estimated_joint_power": 0.83144,
+          "monte_carlo_standard_error": 0.0011838392052977466,
+          "replicates": 100000,
+          "runs_per_order": 23,
+          "successes": 83144,
+          "total_independent_runs": 46,
+          "wilson_95_percent_ci": [
+            0.8291069957867905,
+            0.8337475409291404
+          ],
+          "wilson_95_percent_lower": 0.8291069957867905
+        },
+        "seed": 20260821,
+        "stream_domain": "sample_size_search",
+        "used_for_run_count_selection": true
+      },
+      "target_joint_power": 0.8,
+      "validated_against_actual_bootstrap_gate": false,
+      "wilson_interval_is_independent_of_sample_size_search": true
+    },
+    "limitations": [
+      "Prospective planning output is not experimental evidence.",
+      "This repository example is a software-reproducibility fixture, is not a hardware record, and is ineligible for deposition acceptance analysis.",
+      "Known-SD Normal simulation does not validate the actual percentile-bootstrap gate.",
+      "Pilot or assumed SD uncertainty is not fully modeled.",
+      "The reported final Wilson interval uses a validation stream independent of the run-count search, but remains a Monte Carlo uncertainty diagnostic for the z-surrogate only.",
+      "Scope and rule identifiers are content-bound strings; their authorship, semantics, chronology, and execution require an external signed protocol registry and deviation log.",
+      "The fingerprint proves content identity only; use an external signed, timestamped registry for chronology."
+    ],
+    "power_basis": "surrogate_power_only",
+    "recommended_independent_runs": {
+      "acceptance_requires_exact_counts": true,
+      "balanced_total_is_even": true,
+      "counts_are_independent_runs_not_csv_rows": true,
+      "off_then_on": 23,
+      "on_then_off": 23,
+      "per_order": 23,
+      "total": 46,
+      "unplanned_continuation_is_gate_ineligible": true
+    },
+    "sensitivity_scenarios": [
+      {
+        "design_sd_factor": 1.0,
+        "independent_validation_result": {
+          "estimated_joint_power": 0.82973,
+          "monte_carlo_standard_error": 0.0011886047581092718,
+          "replicates": 100000,
+          "runs_per_order": 23,
+          "successes": 82973,
+          "total_independent_runs": 46,
+          "wilson_95_percent_ci": [
+            0.8273877218388386,
+            0.8320469462499374
+          ],
+          "wilson_95_percent_lower": 0.8273877218388386
+        },
+        "joint_surrogate_recommended_runs_per_order": 23,
+        "joint_surrogate_recommended_total_independent_runs": 46,
+        "joint_surrogate_wilson_95_percent_lower": 0.8273877218388386,
+        "log_ratio_sd": 0.35,
+        "normal_screening_runs_per_order": 23,
+        "normal_screening_total_independent_runs": 46
+      },
+      {
+        "design_sd_factor": 1.25,
+        "independent_validation_result": {
+          "estimated_joint_power": 0.81727,
+          "monte_carlo_standard_error": 0.0012220464275141103,
+          "replicates": 100000,
+          "runs_per_order": 35,
+          "successes": 81727,
+          "total_independent_runs": 70,
+          "wilson_95_percent_ci": [
+            0.8148626606829726,
+            0.8196529646605691
+          ],
+          "wilson_95_percent_lower": 0.8148626606829726
+        },
+        "joint_surrogate_recommended_runs_per_order": 35,
+        "joint_surrogate_recommended_total_independent_runs": 70,
+        "joint_surrogate_wilson_95_percent_lower": 0.8148626606829726,
+        "log_ratio_sd": 0.4375,
+        "normal_screening_runs_per_order": 35,
+        "normal_screening_total_independent_runs": 70
+      },
+      {
+        "design_sd_factor": 1.5,
+        "independent_validation_result": {
+          "estimated_joint_power": 0.81316,
+          "monte_carlo_standard_error": 0.0012326021839993632,
+          "replicates": 100000,
+          "runs_per_order": 50,
+          "successes": 81316,
+          "total_independent_runs": 100,
+          "wilson_95_percent_ci": [
+            0.8107321311125205,
+            0.8155638099868064
+          ],
+          "wilson_95_percent_lower": 0.8107321311125205
+        },
+        "joint_surrogate_recommended_runs_per_order": 50,
+        "joint_surrogate_recommended_total_independent_runs": 100,
+        "joint_surrogate_wilson_95_percent_lower": 0.8107321311125205,
+        "log_ratio_sd": 0.5249999999999999,
+        "normal_screening_runs_per_order": 50,
+        "normal_screening_total_independent_runs": 100
+      }
+    ]
+  },
+  "protocol": {
+    "actual_bootstrap_gate_validated": false,
+    "current_analyzer_gate_compatible": true,
+    "example_only": true,
+    "execution_eligibility_rule": "lock_eligible_and_not_example_only",
+    "execution_eligible": false,
+    "experimental_scope": {
+      "device_id": "EXAMPLE-ONLY-NOT-A-HARDWARE-RECORD",
+      "exclusion_policy_id": "EXAMPLE-ONLY-POLICY-NOT-VALIDATED",
+      "exposure_s": 600.0,
+      "flow_slm": 10.0,
+      "gas": "air",
+      "measurement_method_id": "EXAMPLE-ONLY-METHOD-NOT-VALIDATED",
+      "particle_nm": 300.0,
+      "replacement_policy_id": "EXAMPLE-ONLY-REPLACEMENT-POLICY",
+      "sampled_area_cm2": 25.0,
+      "stopping_rule_id": "EXAMPLE-ONLY-STOPPING-RULE"
+    },
+    "hardware_performance_validated": false,
+    "independent_validation_power_requirement_met": true,
+    "lock_eligibility_meaning": "deterministic_verifier_compatible_not_execution_authorization",
+    "lock_eligible": true,
+    "power_basis": "surrogate_power_only",
+    "prospective_only": true,
+    "protocol_id": "EXAMPLE-ONLY-NOT-A-HARDWARE-RECORD"
+  },
+  "protocol_fingerprint": {
+    "algorithm": "sha256",
+    "canonical_sha256": "0913b1318726ef19dfb966677c037d4ae9278a02a3d2f3089e5aaa7af0620507",
+    "canonicalization": "RFC8785-inspired sorted-key compact UTF-8 JSON excluding protocol_fingerprint",
+    "does_not_prove": [
+      "authorship_or_identity",
+      "creation_time_or_pre_registration_chronology",
+      "protocol_execution",
+      "hardware_performance"
+    ],
+    "proves": "content_identity_only"
+  },
+  "schema_version": 3
+}

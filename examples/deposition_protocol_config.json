@@ -1,0 +1,39 @@
+{
+  "analysis_gate": {},
+  "planning_inputs": {
+    "analysis_blank_policy": "none",
+    "analysis_bootstrap_resamples": 10000,
+    "analysis_bootstrap_seed": 20260820,
+    "anticipated_reduction_fraction": 0.45,
+    "conservative_assumed_log_ratio_sd": 0.35,
+    "device_id": "EXAMPLE-ONLY-NOT-A-HARDWARE-RECORD",
+    "exclusion_policy_id": "EXAMPLE-ONLY-POLICY-NOT-VALIDATED",
+    "exposure_s": 600.0,
+    "flow_slm": 10.0,
+    "gas": "air",
+    "max_order_ratio_fold_difference": 1.5,
+    "max_relative_humidity_span_pct": 5.0,
+    "max_temperature_span_c": 1.0,
+    "mc_search_resamples": 100000,
+    "mc_search_seed": 20260821,
+    "mc_validation_resamples": 100000,
+    "mc_validation_seed": 20260822,
+    "measurement_method_id": "EXAMPLE-ONLY-METHOD-NOT-VALIDATED",
+    "minimum_order_balance_ratio": 0.5,
+    "minimum_reduction_fraction": 0.3,
+    "minimum_runs_per_order_floor": 3,
+    "particle_nm": 300.0,
+    "pilot_independent_run_count": null,
+    "pilot_log_ratio_sd": null,
+    "pilot_sd_design_multiplier": 1.25,
+    "replacement_policy_id": "EXAMPLE-ONLY-REPLACEMENT-POLICY",
+    "sampled_area_cm2": 25.0,
+    "stopping_rule_id": "EXAMPLE-ONLY-STOPPING-RULE",
+    "target_joint_power": 0.8,
+    "two_sided_alpha": 0.05
+  },
+  "protocol": {
+    "example_only": true,
+    "protocol_id": "EXAMPLE-ONLY-NOT-A-HARDWARE-RECORD"
+  }
+}

@@ -1,0 +1,48 @@
+name: Feasibility checks
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.9", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - run: python -m unittest discover -s tests -v
+      - run: >-
+          cc -I sdk -std=c11 -Wall -Wextra -Wpedantic -Wconversion -Werror
+          -c sdk/aegis_core.c -o /tmp/aegis_core.o
+      - run: >-
+          c++ -I. -std=c++17 -Wall -Wextra -Wpedantic -Werror
+          -include sdk/aegis_core.h -x c++ -fsyntax-only /dev/null
+      - run: python simulation/aegis_phase_calibration.py examples --json
+      - run: make phase-benchmark PYTHON=python
+      - run: make phase-uncertainty PYTHON=python
+      - run: >-
+          python analysis/aegis_phase_measurement_analysis.py
+          examples/phase_measurement_template.csv --summary-only --report-only
+      - run: >-
+          python simulation/aegis_radiation_force_feasibility.py
+          --no-show --no-plot --format json
+          --diameters-nm 10,50,150,300
+      - run: >-
+          python analysis/aegis_deposition_power.py verify
+          examples/deposition_protocol_template.json
+      - run: >-
+          python analysis/aegis_deposition_analysis.py
+          examples/deposition_trial_template.csv
+          --blank-policy paired_subtract --bootstrap-resamples 10000
+          --seed 77 --minimum-reduction 0.30 --minimum-independent-runs 6
+          --report-only
