@@ -7,7 +7,7 @@ PYTHONPYCACHEPREFIX ?= /tmp/aegis-pycache
 export MPLCONFIGDIR
 export PYTHONPYCACHEPREFIX
 
-.PHONY: verify phase-benchmark phase-uncertainty phase-measurement-example radiation-report deposition-power deposition-example c-sdk-check whitepaper-pdf whitepaper-check
+.PHONY: verify phase-benchmark phase-uncertainty phase-measurement-example radiation-report agglomeration-report deposition-power deposition-example c-sdk-check whitepaper-pdf whitepaper-check
 
 verify: c-sdk-check
 	$(PYTHON) -m unittest discover -s tests -v
@@ -27,6 +27,9 @@ phase-measurement-example:
 
 radiation-report:
 	$(PYTHON) simulation/aegis_radiation_force_feasibility.py --no-show --no-plot --format json --diameters-nm 10,20,50,100,150,300
+
+agglomeration-report:
+	$(PYTHON) simulation/aegis_agglomeration_timescale.py --no-show --no-plot --format json --diameters-nm 10,20,50 --iso-classes 1,2,3,5
 
 deposition-power:
 	$(PYTHON) analysis/aegis_deposition_power.py verify examples/deposition_protocol_template.json

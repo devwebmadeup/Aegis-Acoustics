@@ -68,7 +68,9 @@ The seeded phase-uncertainty command is also a software sensitivity study, not a
 
 **Conclusion (EN):** The code establishes calculation consistency, host runtime, assumed-noise sensitivity, C/Python numerical parity, measured-drive-phase/deposition pipeline behavior, and results under explicit ideal standing-wave assumptions. None is device-performance evidence. The first hardware target is deposition reduction from 300 nm down toward 150 nm; 10–50 nm blocking and HVAC replacement remain NO-GO.
 
-증거 정의·재현 방법 / Evidence definitions and reproduction: [`docs/FEASIBILITY_EVIDENCE.md`](docs/FEASIBILITY_EVIDENCE.md). 나노입자 모델 선택과 연속체 gap: [`docs/MODEL_SELECTION.md`](docs/MODEL_SELECTION.md).
+증거 정의·재현 방법 / Evidence definitions and reproduction: [`docs/FEASIBILITY_EVIDENCE.md`](docs/FEASIBILITY_EVIDENCE.md). 나노입자 모델 선택과 연속체 gap: [`docs/MODEL_SELECTION.md`](docs/MODEL_SELECTION.md). 탐색적 하이브리드 대안 트랙(음향 응집): [`docs/hybrid/`](docs/hybrid/README.md).
+
+Exploratory hybrid alternative track (acoustic agglomeration): [`docs/hybrid/`](docs/hybrid/README.md).
 
 ## 재현 가능한 출력 / Reproducible Outputs
 
@@ -85,6 +87,7 @@ make phase-benchmark
 make phase-uncertainty
 make phase-measurement-example
 make radiation-report
+make agglomeration-report
 make deposition-power
 make deposition-example
 make whitepaper-check
@@ -106,7 +109,8 @@ python3 analysis/aegis_deposition_power.py verify "$plan_dir/locked.json"
 ## 📁 Repository Contents / 리포지토리 구성
 
 - [`/docs`](docs/README.md): The Markdown limitations whitepaper is authoritative; the PDF is a generated reading copy of that same document ID. The evidence matrix and model-selection record define reproduction and model boundaries. — Markdown 한계 백서가 권위 원문이며 PDF는 같은 문서 ID의 생성 사본입니다. 증거 매트릭스와 모델 선택 기록이 재현·모델 경계를 정의합니다.
-- `/simulation`: Phase-calibration reference and bounded radiation-force analysis. `aegis_particle_sim.py` is explicitly a concept animation, not a digital twin. — 위상 보정 참조 구현과 제한된 방사력 분석. `aegis_particle_sim.py`는 디지털 트윈이 아닌 개념 애니메이션입니다.
+- [`/docs/hybrid`](docs/hybrid/README.md): An exploratory alternative-architecture track (acoustic agglomeration + radiation-force push) checked against literature and a quantitative concentration-timescale model; not part of the main whitepaper's validated scope. — 문헌·정량 모델로 검증한 탐색적 대안 아키텍처(음향 응집+방사력 push) 트랙이며, 백서 본문의 검증 범위에는 포함되지 않습니다.
+- `/simulation`: Phase-calibration reference, bounded radiation-force analysis, and a Brownian-coagulation timescale model for the hybrid track. `aegis_particle_sim.py` is explicitly a concept animation, not a digital twin. — 위상 보정 참조 구현, 제한된 방사력 분석, 하이브리드 트랙용 응집 timescale 모델. `aegis_particle_sim.py`는 디지털 트윈이 아닌 개념 애니메이션입니다.
 - `/analysis` and `/examples`: Pipelines for future electrical-drive measurements, prospective deposition-power locking, paired-deposition analysis, and synthetic/example-only templates; none is Aegis performance data. — 향후 전기 구동 측정 데이터용 분석·사전 침착 power lock·paired 침착 분석과 synthetic/example-only template이며 Aegis 성능 데이터가 아닙니다.
 - [`/sdk`](sdk/README.md): A stateless, allocation-free C reference implementation with Python numerical-parity and host ABI/build tests. It is not a sensor stack, transducer driver, safety controller, or HIL result. — stateless C 참조 구현과 Python 수치 일치·호스트 ABI 테스트를 제공하지만 driver·안전 제어기·HIL은 아닙니다.
 - `/tools`: Fail-closed Markdown-to-PDF rendering and source-identity checks for the limitations whitepaper. — 한계 백서 PDF 생성과 source-identity 검사를 fail-closed 방식으로 수행합니다.

@@ -15,6 +15,12 @@ Markdown과 PDF에는 같은 문서 ID `AEGIS-FEASIBILITY-LIMITS-2026-08-21-R1`�
 
 The Markdown and the PDF must display the same document ID, `AEGIS-FEASIBILITY-LIMITS-2026-08-21-R1`. If they diverge, the Markdown is authoritative: stop distributing the PDF and regenerate it. A PDF from a past revision is not current evidence and must not be reused.
 
+## 탐색적 후속 트랙 / Exploratory follow-on track
+
+위 "현재 권위 순서"는 백서 본문이 정의하는 원래 아키텍처(순수 음향 방사력 차단)에 대한 것입니다. [`hybrid/`](hybrid/README.md) 폴더는 그 아키텍처가 부딪힌 물리적 장벽에 대한 대안으로 제안된 하이브리드(응집+push) 경로를 문헌·정량 계산으로 검증한 **탐색적** 기록이며, 위 권위 순서와 별개입니다. 백서의 NO-GO 판정과 증거 등급 원칙은 이 폴더에도 동일하게 적용됩니다.
+
+The "current order of authority" above concerns the original architecture (pure acoustic radiation-force exclusion) defined by the whitepaper's body. The [`hybrid/`](hybrid/README.md) folder is an **exploratory** record checking a hybrid (agglomerate + push) alternative — proposed in response to that architecture's physical barrier — against literature and a quantitative calculation, and it sits outside the authority order above. The whitepaper's NO-GO verdict and evidence-grading principles apply there equally.
+
 ## 배포 전 확인 / Pre-distribution checklist
 
 - 첫 페이지에 `제품·하드웨어 성능 미검증`, `제품 및 고객 적용 NO-GO`, `하드웨어 실측 데이터 0건`이 보이는지 확인합니다.

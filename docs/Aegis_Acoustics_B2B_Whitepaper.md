@@ -304,6 +304,10 @@
 
 *Completion of these steps is recorded in [`FEASIBILITY_EVIDENCE.md`](FEASIBILITY_EVIDENCE.md) together with evidence links. Model changes follow the merge gate in [`MODEL_SELECTION.md`](MODEL_SELECTION.md).*
 
+이 백서가 정의하는 아키텍처의 대안으로 제안된 하이브리드 경로(음향 응집+push)는 [`hybrid/`](hybrid/README.md)에서 별도로 탐색 중이며, 이 문서의 NO-GO 판정과 증거 등급 원칙은 그 폴더에도 동일하게 적용됩니다.
+
+*An alternative hybrid path (acoustic agglomeration + push) to the architecture this whitepaper defines is being explored separately in [`hybrid/`](hybrid/README.md); this document's NO-GO verdict and evidence-grading principles apply there equally.*
+
 ---
 
 *Aegis-Acoustics R&D Project © 2026. Research draft released under the repository MIT License.*

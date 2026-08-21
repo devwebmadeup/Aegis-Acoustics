@@ -38,6 +38,10 @@ jobs:
           --no-show --no-plot --format json
           --diameters-nm 10,50,150,300
       - run: >-
+          python simulation/aegis_agglomeration_timescale.py
+          --no-show --no-plot --format json
+          --diameters-nm 10,20,50 --iso-classes 1,2,3,5
+      - run: >-
           python analysis/aegis_deposition_power.py verify
           examples/deposition_protocol_template.json
       - run: >-

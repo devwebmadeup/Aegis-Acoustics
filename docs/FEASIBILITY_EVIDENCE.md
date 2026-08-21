@@ -10,6 +10,10 @@ This document separates the project's claims by evidence level. The governing pr
 
 `verified`는 코드 계산 재현, `passed=true`는 잠긴 한 데이터셋의 구현 규칙 통과만 의미합니다. `validated`는 추적 가능한 Aegis 하드웨어 증거가 있을 때만 사용하며 현재 해당되는 subsystem은 없습니다. `--report-only`의 exit 0도 보고서 생성 성공일 뿐 performance pass가 아닙니다.
 
+이 문서는 원래 아키텍처(직접 방사력 차단)의 증거만 다룹니다. 대안으로 제안된 하이브리드(음향 응집+push) 경로의 증거는 별도 탐색 트랙인 [`hybrid/`](hybrid/README.md)에 정리되어 있으며, 같은 증거 등급 원칙이 적용됩니다.
+
+This document covers evidence for the original architecture (direct radiation-force exclusion) only. Evidence for the proposed hybrid (acoustic agglomeration + push) alternative is tracked separately in [`hybrid/`](hybrid/README.md), under the same evidence-grading principles.
+
 `verified` means only that a code calculation was reproduced; `passed=true` means only that one locked dataset satisfied an implemented rule. `validated` is used only when traceable Aegis hardware evidence exists, and no subsystem currently qualifies. An exit code of 0 from `--report-only` likewise means only that a report was generated successfully, not a performance pass.
 
 ## 증거 수준 / Evidence levels

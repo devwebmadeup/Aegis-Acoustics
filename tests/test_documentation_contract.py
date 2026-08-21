@@ -12,6 +12,9 @@ DOCS_README = REPOSITORY_ROOT / "docs" / "README.md"
 WHITEPAPER = REPOSITORY_ROOT / "docs" / "Aegis_Acoustics_B2B_Whitepaper.md"
 EVIDENCE = REPOSITORY_ROOT / "docs" / "FEASIBILITY_EVIDENCE.md"
 MODEL_SELECTION = REPOSITORY_ROOT / "docs" / "MODEL_SELECTION.md"
+HYBRID_README = REPOSITORY_ROOT / "docs" / "hybrid" / "README.md"
+HYBRID_RESEARCH = REPOSITORY_ROOT / "docs" / "hybrid" / "AGGLOMERATION_RESEARCH.md"
+HYBRID_ESTIMATES = REPOSITORY_ROOT / "docs" / "hybrid" / "FEASIBILITY_ESTIMATES.md"
 PROTOCOL_CONFIG = REPOSITORY_ROOT / "examples" / "deposition_protocol_config.json"
 PROTOCOL_TEMPLATE = REPOSITORY_ROOT / "examples" / "deposition_protocol_template.json"
 
@@ -114,6 +117,26 @@ class PublicClaimBoundaryTests(unittest.TestCase):
         self.assertFalse(locked["protocol"]["execution_eligible"])
         self.assertIn("EXAMPLE-ONLY", locked["protocol"]["protocol_id"])
 
+    def test_core_documents_link_to_the_hybrid_track(self):
+        for name, document in (
+            ("docs README", read(DOCS_README)),
+            ("whitepaper", read(WHITEPAPER)),
+            ("evidence", read(EVIDENCE)),
+            ("model selection", read(MODEL_SELECTION)),
+        ):
+            with self.subTest(document=name):
+                self.assertIn("hybrid/", document)
+
+    def test_hybrid_docs_stay_inside_the_same_evidence_boundary(self):
+        for name, document in (
+            ("hybrid README", read(HYBRID_README)),
+            ("hybrid research note", read(HYBRID_RESEARCH)),
+            ("hybrid estimates", read(HYBRID_ESTIMATES)),
+        ):
+            with self.subTest(document=name):
+                self.assertIn("검증", document)
+                self.assertNotIn("Conditional GO", document)
+
     def test_all_local_markdown_links_resolve(self):
         markdown_files = (
             README,
@@ -121,6 +144,9 @@ class PublicClaimBoundaryTests(unittest.TestCase):
             WHITEPAPER,
             EVIDENCE,
             MODEL_SELECTION,
+            HYBRID_README,
+            HYBRID_RESEARCH,
+            HYBRID_ESTIMATES,
         )
         link_pattern = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
         failures = []

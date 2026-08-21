@@ -4,6 +4,10 @@
 
 This record is a model-rationale appendix to the [Pre-Hardware Feasibility & Limits Whitepaper](Aegis_Acoustics_B2B_Whitepaper.md) and the [Evidence Matrix](FEASIBILITY_EVIDENCE.md). The model review here is not a validation of Aegis hardware performance.
 
+> 아래 결정은 직접 방사력 차단 아키텍처에 대한 것입니다. 이 결정에서 드러난 continuum-적용성 gap을 우회하려는 하이브리드(응집+push) 대안은 별도 탐색 트랙인 [`hybrid/`](hybrid/README.md)에서 문헌·정량 계산으로 검증했으며, cleanroom 농도 조건에서는 다른(더 심각한) 장벽에 부딪힘을 확인했습니다.
+>
+> The decision below concerns the direct radiation-force exclusion architecture. A hybrid (agglomerate + push) alternative that attempts to route around the continuum-applicability gap surfaced here was checked against literature and a quantitative calculation in the separate exploratory track [`hybrid/`](hybrid/README.md), where it was found to run into a different — and more severe — barrier under cleanroom concentration conditions.
+
 ## 결정 / Decision
 
 현재의 inviscid Gor'kov 계산은 수식 회귀와 크기·압력 scaling을 확인하는 기준 모델로만 유지합니다. 10–300 nm 공기 입자의 정량 예측기로 승격하지 않습니다.
