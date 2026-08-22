@@ -308,6 +308,16 @@
 
 *An alternative hybrid path (acoustic agglomeration + push) to the architecture this whitepaper defines is being explored separately in [`hybrid/`](hybrid/README.md); this document's NO-GO verdict and evidence-grading principles apply there equally.*
 
+## 11. 문서 이력 및 투명성 고지 / 11. Document History and Transparency Disclosure
+
+이 프로젝트는 처음에는 홍보성 어조의 기술 백서로 시작했습니다. 이후 여러 차례에 걸쳐 원래 주장을 실제 물리학·통계학 문헌과 정량 계산으로 검증했고, 그 결과 스스로 핵심 주장 다수를 NO-GO로 재평가했습니다. 이 재구성 과정의 상당 부분 — 문헌 조사, 물리 모델 구현, 테스트 작성, 문서 재작성 — 은 AI 어시스턴트(Anthropic Claude)의 지원을 받아 수행되었으며, 사람이 방향을 지시하고 결과를 검토했습니다.
+
+*This project began as a promotionally toned technical whitepaper. Over several rounds, its original claims were checked against real physics/statistics literature and quantitative calculation, and as a result it was self-revised down to a NO-GO verdict on most of its core claims. A substantial part of this rebuild — literature review, physics-model implementation, test authoring, and document rewriting — was carried out with the assistance of an AI assistant (Anthropic Claude), under human direction and review.*
+
+이 사실을 공개하는 이유는, 이 저장소가 스스로에게 적용하는 원칙(측정되지 않은 것을 검증됐다고 말하지 않는다)을 저장소의 출처 자체에도 동일하게 적용하기 위해서입니다. 이 백서나 하이브리드 트랙의 어떤 물리적 결론도 저작 방식 때문에 더 신뢰할 만하거나 덜 신뢰할 만해지지 않습니다 — 판단은 인용된 문헌과 코드를 직접 재현해 확인하시기 바랍니다.
+
+*This is disclosed for the same reason the repository refuses to call anything "validated" that hasn't been measured — to apply that same standard to the repository's own provenance. No physical conclusion in this whitepaper or the hybrid track becomes more or less credible because of how it was authored; verify it by reproducing the cited literature and code directly.*
+
 ---
 
 *Aegis-Acoustics R&D Project © 2026. Research draft released under the repository MIT License.*
